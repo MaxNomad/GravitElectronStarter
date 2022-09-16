@@ -59,7 +59,7 @@
     "morgan": "^1.10.0",
     "node-localstorage": "^2.2.1",
     "nodejs-file-downloader": "^4.10.2",
-    "react": "16.13.1",
+    "react": "16.14.0",
     "react-animated-css": "^1.2.1",
     "react-content-loader": "^6.2.0",
     "react-dom": "16.13.1",
