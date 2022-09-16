@@ -3,8 +3,12 @@ const si = require('systeminformation')
 const path = require('path');
 const bodyParser = require('body-parser');
 const Downloader = require("nodejs-file-downloader");
-
+const StormDB = require("stormdb");
 const app = express();
+const engine = new StormDB.localFileEngine("./db.stormdb");
+const db = new StormDB(engine);
+db.default({ perc: null, firstInstall: false});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -35,7 +39,7 @@ app.get('/checkJava', (req, res) => {
     }
 
     javaversion(function (err, version) {
-        res.send({ version: version });
+        res.send({ version: version, error: err });
     })
 
 });
@@ -55,14 +59,13 @@ app.get('/checkSystem', (req, res) => {
 app.get('/startDownloadJava', (req, res) => {
     (async () => {
         const downloader = new Downloader({
-            url: "https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/8u342-b07/openlogic-openjdk-jre-8u342-b07-windows-x64.zip",
+            url: "https://download.bell-sw.com/java/8u345+1/bellsoft-jdk8u345+1-windows-amd64-full.zip",
             directory: "../java",
             cloneFiles: false,
             fileName: "java.zip",
             onProgress: (perc, chunk, remSize) => {
-                setInterval(() => {
-                    localStorage.setItem('percentage', perc)
-                }, 500);
+                console.log(perc)
+                
 
     },
         });
@@ -77,8 +80,15 @@ try {
     
 });
 app.get('/startDownloadJavaStats', (req, res) => {
+    res.send({ pers: localStorage.getItem('perc') })
+});
 
-    res.send({ percentage: localStorage.getItem('percentage') });
+app.get('/updateLauncher', (req, res) => {
+
+
+});
+
+app.get('/startLauncher', (req, res) => {
 
 
 });
