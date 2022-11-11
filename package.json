@@ -71,7 +71,7 @@
     "sass": "^1.54.8",
     "scss": "^0.2.4",
     "stormdb": "^0.6.0",
-    "systeminformation": "^5.12.6",
+    "systeminformation": "^5.12.14",
     "web-vitals": "^3.0.1"
   },
   "babel": {
